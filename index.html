@@ -1,45 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',sans-serif}
-html,body{width:100%;height:100%;background:#fff}
-.wrap{width:100%;height:100vh;padding:3vh 5vw;display:flex;flex-direction:column;justify-content:center}
-.counter{font-size:clamp(12px,1.4vw,18px);color:#888;margin-bottom:1.5vh}
-.qtext{font-size:clamp(16px,2vw,28px);font-weight:500;color:#1a1a1a;line-height:1.5;margin-bottom:2.5vh}
-.opts{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px)}
-.opt{display:flex;align-items:center;gap:clamp(10px,1.2vw,18px);padding:clamp(10px,1.4vh,18px) clamp(12px,1.6vw,24px);border:1.5px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all 0.15s}
+html,body{width:100%;margin:0;padding:0}
+*{box-sizing:border-box;font-family:'Outfit',sans-serif}
+.wrap{width:100%;padding:5% 6%}
+.counter{font-size:max(14px,1.6vw);color:#888;margin-bottom:2%}
+.qtext{font-size:max(18px,2.2vw);font-weight:500;color:#1a1a1a;line-height:1.5;margin-bottom:4%}
+.opts{display:flex;flex-direction:column;gap:max(10px,1.4vw)}
+.opt{display:flex;align-items:center;gap:max(10px,1.4vw);padding:max(12px,1.6vw) max(14px,2vw);border:1.5px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all 0.15s}
 .opt:hover{border-color:#9d78c4;background:#f7f4fc}
 .opt.sel{border-color:#724b9e;background:#f0ebf8}
 .opt.ok{border-color:#1D9E75;background:#E1F5EE;cursor:default}
 .opt.bad{border-color:#D85A30;background:#FAECE7;cursor:default}
 .opt.lock{cursor:default}
-.letter{width:clamp(26px,2.6vw,40px);height:clamp(26px,2.6vw,40px);border-radius:50%;background:#ede8f5;color:#724b9e;font-size:clamp(12px,1.3vw,18px);font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.letter{width:max(28px,3vw);height:max(28px,3vw);border-radius:50%;background:#ede8f5;color:#724b9e;font-size:max(13px,1.5vw);font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .opt.ok .letter{background:#9FE1CB;color:#0F6E56}
 .opt.bad .letter{background:#F5C4B3;color:#993C1D}
-.opttext{font-size:clamp(14px,1.6vw,22px);color:#1a1a1a;line-height:1.4}
-code{background:#f0ebf8;color:#724b9e;padding:1px 5px;border-radius:4px;font-family:'Courier New',monospace;font-size:0.9em}
-.fb{margin-top:1.5vh;padding:clamp(8px,1.2vh,16px) clamp(12px,1.4vw,20px);border-radius:8px;font-size:clamp(13px,1.4vw,19px);line-height:1.5;display:none;border-left:3px solid}
+.opttext{font-size:max(16px,1.8vw);color:#1a1a1a;line-height:1.4}
+.fb{margin-top:max(12px,1.6vw);padding:max(10px,1.4vw) max(14px,1.8vw);border-radius:8px;font-size:max(15px,1.6vw);line-height:1.5;display:none;border-left:3px solid}
 .fb.show{display:block}
 .fb.ok{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75}
 .fb.bad{background:#FAECE7;color:#993C1D;border-color:#D85A30}
-.btns{display:flex;gap:clamp(8px,1vw,16px);margin-top:2vh;flex-wrap:wrap}
-.btn{padding:clamp(8px,1.1vh,14px) clamp(16px,2.2vw,36px);border-radius:8px;font-size:clamp(13px,1.4vw,20px);font-weight:500;cursor:pointer;border:1.5px solid #724b9e;transition:all 0.15s;white-space:nowrap}
+.btns{display:flex;gap:max(8px,1.2vw);margin-top:max(14px,2vw);flex-wrap:wrap}
+.btn{padding:max(10px,1.3vw) max(20px,3vw);border-radius:8px;font-size:max(15px,1.7vw);font-weight:500;cursor:pointer;border:1.5px solid #724b9e;transition:all 0.15s;white-space:nowrap}
 .btn-p{background:#724b9e;color:#fff}
 .btn-p:hover{background:#5a3a82}
 .btn-o{background:transparent;color:#724b9e}
 .btn-o:hover{background:#f0ebf8}
 .pg{display:none}
-.pg.on{display:flex;flex-direction:column;justify-content:center;height:100%}
+.pg.on{display:block}
 </style>
-</head>
-<body>
-<div class="wrap">
  
-  <!-- Q1 -->
+<div class="wrap">
   <div id="g1" class="pg on">
     <div class="counter">Question 1 of 2</div>
     <div class="qtext">Which type of software translates and executes a program one statement at a time?</div>
@@ -56,7 +47,6 @@ code{background:#f0ebf8;color:#724b9e;padding:1px 5px;border-radius:4px;font-fam
     </div>
   </div>
  
-  <!-- Q2 -->
   <div id="g2" class="pg">
     <div class="counter">Question 2 of 2</div>
     <div class="qtext">Which of the following is an example of a high-level programming language?</div>
@@ -72,11 +62,10 @@ code{background:#f0ebf8;color:#724b9e;padding:1px 5px;border-radius:4px;font-fam
       <button class="btn btn-o" id="rt" style="display:none" onclick="reset()">↺ Try again</button>
     </div>
   </div>
- 
 </div>
+ 
 <script>
-var cur={1:null,2:null};
-var lk={1:0,2:0};
+var cur={1:null,2:null},lk={1:0,2:0};
 function pick(q,el,l){if(lk[q])return;cur[q]=l;document.querySelectorAll('#o'+q+' .opt').forEach(function(o){o.classList.remove('sel')});el.classList.add('sel');}
 function chk(q,ans,cm,wm){
   if(!cur[q])return;lk[q]=1;
@@ -84,22 +73,13 @@ function chk(q,ans,cm,wm){
   document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.classList.add('lock');if(ls[i]===ans){o.classList.add('ok');o.querySelector('.letter').textContent='✓';}else if(ls[i]===cur[q]&&cur[q]!==ans){o.classList.add('bad');}});
   var f=document.getElementById('f'+q);f.className='fb show '+(cur[q]===ans?'ok':'bad');f.textContent=cur[q]===ans?cm:wm;
   document.getElementById('c'+q).style.display='none';
-  var nxt=q<2?'n'+q:'rt';
-  document.getElementById(nxt).style.display='inline-block';
+  document.getElementById(q===1?'n1':'rt').style.display='inline-block';
 }
 function next(a,b){document.getElementById('g'+a).classList.remove('on');document.getElementById('g'+b).classList.add('on');}
 function reset(){
   cur={1:null,2:null};lk={1:0,2:0};
-  [1,2].forEach(function(q){
-    document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.className='opt';o.querySelector('.letter').textContent=['A','B','C','D'][i];});
-    var f=document.getElementById('f'+q);f.className='fb';f.textContent='';
-    document.getElementById('c'+q).style.display='inline-block';
-    if(q<2)document.getElementById('n'+q).style.display='none';
-  });
-  document.getElementById('rt').style.display='none';
-  document.getElementById('g2').classList.remove('on');
-  document.getElementById('g1').classList.add('on');
+  [1,2].forEach(function(q){document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.className='opt';o.querySelector('.letter').textContent=['A','B','C','D'][i];});var f=document.getElementById('f'+q);f.className='fb';f.textContent='';document.getElementById('c'+q).style.display='inline-block';});
+  document.getElementById('n1').style.display='none';document.getElementById('rt').style.display='none';
+  document.getElementById('g2').classList.remove('on');document.getElementById('g1').classList.add('on');
 }
 </script>
-</body>
-</html>
