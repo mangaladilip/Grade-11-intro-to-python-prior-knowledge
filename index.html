@@ -1,0 +1,85 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+html,body{width:100%;margin:0;padding:0}
+*{box-sizing:border-box;font-family:'Outfit',sans-serif}
+.wrap{width:100%;padding:5% 6%}
+.counter{font-size:max(14px,1.6vw);color:#888;margin-bottom:2%}
+.qtext{font-size:max(18px,2.2vw);font-weight:500;color:#1a1a1a;line-height:1.5;margin-bottom:4%}
+.opts{display:flex;flex-direction:column;gap:max(10px,1.4vw)}
+.opt{display:flex;align-items:center;gap:max(10px,1.4vw);padding:max(12px,1.6vw) max(14px,2vw);border:1.5px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:all 0.15s}
+.opt:hover{border-color:#9d78c4;background:#f7f4fc}
+.opt.sel{border-color:#724b9e;background:#f0ebf8}
+.opt.ok{border-color:#1D9E75;background:#E1F5EE;cursor:default}
+.opt.bad{border-color:#D85A30;background:#FAECE7;cursor:default}
+.opt.lock{cursor:default}
+.letter{width:max(28px,3vw);height:max(28px,3vw);border-radius:50%;background:#ede8f5;color:#724b9e;font-size:max(13px,1.5vw);font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.ok .letter{background:#9FE1CB;color:#0F6E56}
+.opt.bad .letter{background:#F5C4B3;color:#993C1D}
+.opttext{font-size:max(16px,1.8vw);color:#1a1a1a;line-height:1.4}
+.fb{margin-top:max(12px,1.6vw);padding:max(10px,1.4vw) max(14px,1.8vw);border-radius:8px;font-size:max(15px,1.6vw);line-height:1.5;display:none;border-left:3px solid}
+.fb.show{display:block}
+.fb.ok{background:#E1F5EE;color:#0F6E56;border-color:#1D9E75}
+.fb.bad{background:#FAECE7;color:#993C1D;border-color:#D85A30}
+.btns{display:flex;gap:max(8px,1.2vw);margin-top:max(14px,2vw);flex-wrap:wrap}
+.btn{padding:max(10px,1.3vw) max(20px,3vw);border-radius:8px;font-size:max(15px,1.7vw);font-weight:500;cursor:pointer;border:1.5px solid #724b9e;transition:all 0.15s;white-space:nowrap}
+.btn-p{background:#724b9e;color:#fff}
+.btn-p:hover{background:#5a3a82}
+.btn-o{background:transparent;color:#724b9e}
+.btn-o:hover{background:#f0ebf8}
+.pg{display:none}
+.pg.on{display:block}
+</style>
+ 
+<div class="wrap">
+  <div id="g1" class="pg on">
+    <div class="counter">Question 1 of 2</div>
+    <div class="qtext">Which type of software translates and executes a program one statement at a time?</div>
+    <div class="opts" id="o1">
+      <div class="opt" onclick="pick(1,this,'A')"><div class="letter">A</div><div class="opttext">Compiler</div></div>
+      <div class="opt" onclick="pick(1,this,'B')"><div class="letter">B</div><div class="opttext">Assembler</div></div>
+      <div class="opt" onclick="pick(1,this,'C')"><div class="letter">C</div><div class="opttext">Interpreter</div></div>
+      <div class="opt" onclick="pick(1,this,'D')"><div class="letter">D</div><div class="opttext">Linker</div></div>
+    </div>
+    <div class="fb" id="f1"></div>
+    <div class="btns">
+      <button class="btn btn-p" id="c1" onclick="chk(1,'C','Correct. An interpreter translates and executes a program one statement at a time, reporting errors as soon as they are encountered.','The correct answer is C. A compiler translates the entire program before execution, whereas an interpreter processes and executes one statement at a time.')">Check answer</button>
+      <button class="btn btn-o" id="n1" style="display:none" onclick="next(1,2)">Next question →</button>
+    </div>
+  </div>
+ 
+  <div id="g2" class="pg">
+    <div class="counter">Question 2 of 2</div>
+    <div class="qtext">Which of the following is an example of a high-level programming language?</div>
+    <div class="opts" id="o2">
+      <div class="opt" onclick="pick(2,this,'A')"><div class="letter">A</div><div class="opttext">Machine code</div></div>
+      <div class="opt" onclick="pick(2,this,'B')"><div class="letter">B</div><div class="opttext">Assembly language</div></div>
+      <div class="opt" onclick="pick(2,this,'C')"><div class="letter">C</div><div class="opttext">Binary</div></div>
+      <div class="opt" onclick="pick(2,this,'D')"><div class="letter">D</div><div class="opttext">Python</div></div>
+    </div>
+    <div class="fb" id="f2"></div>
+    <div class="btns">
+      <button class="btn btn-p" id="c2" onclick="chk(2,'D','Correct. Python is a high-level programming language — it uses syntax that is close to natural language and does not require knowledge of hardware.','The correct answer is D. Machine code, assembly language, and binary are all low-level — they operate closer to the hardware. Python is a high-level language.')">Check answer</button>
+      <button class="btn btn-o" id="rt" style="display:none" onclick="reset()">↺ Try again</button>
+    </div>
+  </div>
+</div>
+ 
+<script>
+var cur={1:null,2:null},lk={1:0,2:0};
+function pick(q,el,l){if(lk[q])return;cur[q]=l;document.querySelectorAll('#o'+q+' .opt').forEach(function(o){o.classList.remove('sel')});el.classList.add('sel');}
+function chk(q,ans,cm,wm){
+  if(!cur[q])return;lk[q]=1;
+  var ls=['A','B','C','D'];
+  document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.classList.add('lock');if(ls[i]===ans){o.classList.add('ok');o.querySelector('.letter').textContent='✓';}else if(ls[i]===cur[q]&&cur[q]!==ans){o.classList.add('bad');}});
+  var f=document.getElementById('f'+q);f.className='fb show '+(cur[q]===ans?'ok':'bad');f.textContent=cur[q]===ans?cm:wm;
+  document.getElementById('c'+q).style.display='none';
+  document.getElementById(q===1?'n1':'rt').style.display='inline-block';
+}
+function next(a,b){document.getElementById('g'+a).classList.remove('on');document.getElementById('g'+b).classList.add('on');}
+function reset(){
+  cur={1:null,2:null};lk={1:0,2:0};
+  [1,2].forEach(function(q){document.querySelectorAll('#o'+q+' .opt').forEach(function(o,i){o.className='opt';o.querySelector('.letter').textContent=['A','B','C','D'][i];});var f=document.getElementById('f'+q);f.className='fb';f.textContent='';document.getElementById('c'+q).style.display='inline-block';});
+  document.getElementById('n1').style.display='none';document.getElementById('rt').style.display='none';
+  document.getElementById('g2').classList.remove('on');document.getElementById('g1').classList.add('on');
+}
+</script>
